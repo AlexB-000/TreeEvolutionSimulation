@@ -1,0 +1,65 @@
+----------- global ---------
+
+    std::shared_ptr<Cell> exeCell;
+    int nCells = 0;
+
+-------------- step ------------------
+    int n = nCells;
+    for (uint32_t i = 0; i < n; i++) {
+        std::cout << i << "/" << n << " " << nCells << std::endl;
+
+        exeCell = exeCell->next;
+
+
+-------------- throw seeds -----------
+
+            if (index == 0){
+                cell0 = cell;
+            } else if (index == n-1){
+                cellN = cell;
+                cell->prev = prevCell;
+                prevCell->next = cell;
+            } else {
+                cell->prev = prevCell;
+                prevCell->next = cell;
+            }
+
+            nCells ++;
+
+            prevCell = cell;
+
+    exeCell = cell0;
+
+if (n>1){
+        cell0->prev = cellN;
+        cellN->next = cell0;
+    }
+    else {
+        cell0->prev = cell0;
+        cell0->next = cell0;
+    }
+
+-------------- birth ----------------
+    nCells++;
+    newCell->prev = cell->prev;
+    newCell->next = cell;
+    
+    cell->prev->next = newCell;
+    cell->prev = newCell;
+
+------------- birth ----------------
+    nCells++;
+    cell->prev = inPrev;
+    cell->next = inNext;
+
+----------- die -----------
+    cell->prev->next = cell->next;
+    cell->next->prev = cell->prev;
+
+    nCells--;
+
+----------- die tree ------
+        cell->prev->next = cell->next;
+        cell->next->prev = cell->prev;
+
+        nCells--;
