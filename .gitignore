@@ -1,5 +1,6 @@
-.vscode/
-build
+.vscode
+.vs
+build*
 
 # Prerequisites
 *.d
