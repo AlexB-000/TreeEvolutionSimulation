@@ -18,7 +18,7 @@ int main(){
 
     bool running = false;
     bool display = true;
-    
+    std::cout << "launch\n";
     while (window.isOpen())
     {
         processEvents(window, render, max_framerate, display, running);

@@ -44,7 +44,7 @@ sf::Color wheelColor(int n){
 sf::Color randomColor(){
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dis(0, 120);
+    std::uniform_int_distribution<int> dis(0, 119);
     return wheelColor(dis(gen));
 }
 
@@ -114,7 +114,7 @@ Simulation::Simulation(){
 }
 
 void Simulation::throwSeeds(int n){
-    n = n % conf::columns;
+    n = std::min(n, conf::columns);
 
     //random numbers generator
     std::random_device rd;
@@ -130,7 +130,7 @@ void Simulation::throwSeeds(int n){
             world[i][j].energy = conf::startEnergy;
 
             newTree(&world[i][j], randomColor(), randomADN());
-            //showADN(trees.back()->ADN);
+            // showADN(trees[index].ADN);
 
             world[i][j].type = 3; // seed
         }
@@ -280,11 +280,11 @@ std::vector<std::vector<int>> Simulation::mutation(std::vector<std::vector<int>>
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    std::uniform_int_distribution<int> probaDis(1, 100);
+    std::uniform_real_distribution<float> probaDis(0, 1);
     if ( probaDis(gen) <= conf::mutationRate ){
 
         std::uniform_int_distribution<int> geneDis(0, conf::genomeLength-1);
-        std::uniform_int_distribution<int> genePartDis(0, 4);
+        std::uniform_int_distribution<int> genePartDis(0, 3);
 
         std::uniform_int_distribution<int> valueDis(0, conf::genomeLength * 2 - 1);
         ADN [ geneDis(gen) ] [ genePartDis(gen) ] = valueDis(gen);

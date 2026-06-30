@@ -31,6 +31,6 @@ constexpr int startEnergy = 100;
 
 constexpr int lifetime = lines;
 
-constexpr int genomeLength = 20;
-constexpr int mutationRate = 25;
+constexpr unsigned int genomeLength = 20;
+constexpr float mutationRate = 0.25;
 };
